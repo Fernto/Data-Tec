@@ -1,5 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import ReactDOM from 'react-dom/client';
 import cors from 'cors';
 
 const app = express();
