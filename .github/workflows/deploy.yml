@@ -24,13 +24,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          
+
       - name: Debug Folder Structure
         run: ls -R
 
       - name: Install dependencies
         working-directory: ./proyecto-master/Tec-Data-Collections
-        # CORRECCIÓN: Usamos '|' para ejecutar varios comandos en el mismo paso
+        # CORRECCIÓN: Usamos '|' para ejecutar varios comandos juntos
         run: |
           npm install
           npm install react-icons
