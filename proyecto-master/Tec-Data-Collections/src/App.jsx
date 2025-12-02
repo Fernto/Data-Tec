@@ -1,10 +1,10 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer'; // <--- Importamos Footer
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Dashboard from './pages/Dashboard';
-import NotFound from './pages/NotFound'; // <--- Importamos NotFound
+import NotFound from './pages/NotFound';
 import './App.css';
 
 function App() {
