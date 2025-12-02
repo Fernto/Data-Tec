@@ -2,15 +2,13 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ] # O 'master', revisa cómo se llama tu rama principal
+    branches: [ "main" ] # Asegúrate que tu rama sea 'main'
 
-# Permisos necesarios para desplegar en Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Permite una sola construcción a la vez
 concurrency:
   group: "pages"
   cancel-in-progress: true
@@ -21,23 +19,30 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-          
+          # Le decimos a Node dónde buscar el package-lock.json para el caché
+          cache-dependency-path: './Tec-Data-Collections/package-lock.json'
+
       - name: Install dependencies
-        run: npm ci # Instala limpio basado en package-lock.json
-        
+        # Entramos a la carpeta antes de instalar
+        working-directory: ./Tec-Data-Collections
+        run: npm ci
+
       - name: Build
-        run: npm run build # Crea la carpeta dist
-        
+        # Entramos a la carpeta antes de construir
+        working-directory: ./Tec-Data-Collections
+        run: npm run build
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # <--- Vite guarda aquí los archivos, por eso usamos dist
+          # IMPORTANTE: Ahora la carpeta dist está dentro de la subcarpeta
+          path: './Tec-Data-Collections/dist'
 
   deploy:
     environment:
