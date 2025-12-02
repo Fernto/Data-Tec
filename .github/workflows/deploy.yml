@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ "main" ] # Asegúrate que tu rama sea 'main'
+    branches: [ "main" ]
 
 permissions:
   contents: read
@@ -25,24 +25,24 @@ jobs:
         with:
           node-version: 20
           cache: 'npm'
-          # Le decimos a Node dónde buscar el package-lock.json para el caché
-          cache-dependency-path: './Tec-Data-Collections/package-lock.json'
+          # CORRECCIÓN 1: Ruta exacta al archivo de bloqueo
+          cache-dependency-path: './proyecto-master/Tec-Data-Collections/package-lock.json'
 
       - name: Install dependencies
-        # Entramos a la carpeta antes de instalar
-        working-directory: ./Tec-Data-Collections
+        # CORRECCIÓN 2: Entrar a la carpeta doblemente anidada
+        working-directory: ./proyecto-master/Tec-Data-Collections
         run: npm ci
 
       - name: Build
-        # Entramos a la carpeta antes de construir
-        working-directory: ./Tec-Data-Collections
+        # CORRECCIÓN 3: Construir desde la carpeta correcta
+        working-directory: ./proyecto-master/Tec-Data-Collections
         run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # IMPORTANTE: Ahora la carpeta dist está dentro de la subcarpeta
-          path: './Tec-Data-Collections/dist'
+          # CORRECCIÓN 4: Subir la carpeta dist que se genera ahí dentro
+          path: './proyecto-master/Tec-Data-Collections/dist'
 
   deploy:
     environment:
