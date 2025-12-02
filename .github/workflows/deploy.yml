@@ -24,18 +24,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          # Quitamos el caché por ahora para evitar errores si falta el lockfile
           
-      - name: Debug Folder Structure (Opcional)
+      - name: Debug Folder Structure
         run: ls -R
-        # Esto nos ayudará a ver en los logs qué carpetas ve GitHub realmente
 
       - name: Install dependencies
-        # Usamos la ruta completa que vimos en tu captura
         working-directory: ./proyecto-master/Tec-Data-Collections
-        # Usamos 'install' en lugar de 'ci' porque es menos estricto si hay diferencias
-        run: npm install
-        run: npm install react-icons
+        # CORRECCIÓN: Usamos '|' para ejecutar varios comandos en el mismo paso
+        run: |
+          npm install
+          npm install react-icons
 
       - name: Build
         working-directory: ./proyecto-master/Tec-Data-Collections
@@ -44,7 +42,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Vite guarda la build en 'dist' dentro de la subcarpeta
           path: './proyecto-master/Tec-Data-Collections/dist'
 
   deploy:
