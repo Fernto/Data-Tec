@@ -26,16 +26,16 @@ jobs:
           node-version: 20
           cache: 'npm'
           # CORRECCIÓN 1: Ruta exacta al archivo de bloqueo
-          cache-dependency-path: './proyecto-master/Tec-Data-Collections/package-lock.json'
+          cache-dependency-path: 'proyecto-master/Tec-Data-Collections/package-lock.json'
 
       - name: Install dependencies
         # CORRECCIÓN 2: Entrar a la carpeta doblemente anidada
-        working-directory: ./proyecto-master/Tec-Data-Collections
+        working-directory: 'proyecto-master/Tec-Data-Collections'
         run: npm ci
 
       - name: Build
         # CORRECCIÓN 3: Construir desde la carpeta correcta
-        working-directory: ./proyecto-master/Tec-Data-Collections
+        working-directory: .'proyecto-master/Tec-Data-Collections'
         run: npm run build
 
       - name: Upload artifact
