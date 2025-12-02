@@ -35,6 +35,7 @@ jobs:
         working-directory: ./proyecto-master/Tec-Data-Collections
         # Usamos 'install' en lugar de 'ci' porque es menos estricto si hay diferencias
         run: npm install
+        run: npm install react-icons
 
       - name: Build
         working-directory: ./proyecto-master/Tec-Data-Collections
